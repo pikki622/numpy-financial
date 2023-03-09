@@ -139,11 +139,7 @@ def fv(rate, nper, pmt, pv, when='end'):
         * (temp - 1)
     )
 
-    if np.ndim(fv_array) == 0:
-        # Follow the ufunc convention of returning scalars for scalar
-        # and 0d array inputs.
-        return fv_array.item(0)
-    return fv_array
+    return fv_array.item(0) if np.ndim(fv_array) == 0 else fv_array
 
 
 def pmt(rate, nper, pv, fv=0, when='end'):
@@ -431,11 +427,7 @@ def ipmt(rate, per, nper, pv, fv=0, when='end'):
         ipmt_array[per_gt_1_and_begin] / (1 + rate[per_gt_1_and_begin])
     )
 
-    if np.ndim(ipmt_array) == 0:
-        # Follow the ufunc convention of returning scalars for scalar
-        # and 0d array inputs.
-        return ipmt_array.item(0)
-    return ipmt_array
+    return ipmt_array.item(0) if np.ndim(ipmt_array) == 0 else ipmt_array
 
 
 def _rbl(rate, per, pmt, pv, when):
